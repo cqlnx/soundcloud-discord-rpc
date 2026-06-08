@@ -31,8 +31,15 @@ pip install -r requirements.txt
 The extension is what reads information from the SoundCloud web player and sends it to the local RPC server.
 
 #### Chrome / Edge / Brave
+#### Chrome / Edge / Brave
 
-1. Open `chrome://extensions`
+1. Open the Extensions page:
+   - Chrome: `chrome://extensions`
+   - Edge: `edge://extensions`
+   - Brave: `brave://extensions`
+2. Enable **Developer mode** (toggle in the top-right corner)
+3. Click **Load unpacked**
+4. Select the project's `extension` folder
 2. Enable **Developer mode** (toggle in the top-right corner)
 3. Click **Load unpacked**
 4. Select the project's `extension` folder
