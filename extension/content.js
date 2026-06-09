@@ -1,5 +1,12 @@
 let lastTrack = "";
 let lastElapsed = 0;
+let isCleared = false;
+
+function isPlaying() {
+    const btn = document.querySelector(".playControls__play");
+    if (!btn) return false;
+    return btn.classList.contains("playing");
+}
 
 function getElapsedSeconds() {
     const el = document.querySelector('.playbackTimeline__timePassed span[aria-hidden="true"]');
@@ -44,7 +51,25 @@ function send(payload) {
     }).catch(() => {});
 }
 
-function checkTrackChange() {
+function clear() {
+    fetch("http://127.0.0.1:8765/clear", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" }
+    }).catch(() => {});
+}
+
+function checkState() {
+    if (!isPlaying()) {
+        if (!isCleared) {
+            isCleared = true;
+            lastTrack = "";
+            clear();
+        }
+        return;
+    }
+
+    isCleared = false;
+
     const data = getTrackData();
     if (!data) return;
 
@@ -58,6 +83,8 @@ function checkTrackChange() {
 }
 
 function updateTime() {
+    if (!isPlaying()) return;
+
     const data = getTrackData();
     if (!data) return;
 
@@ -69,8 +96,8 @@ function updateTime() {
     send({ title: data.title, artist: data.artist, artwork: data.artwork, elapsed });
 }
 
-const observer = new MutationObserver(checkTrackChange);
+const observer = new MutationObserver(checkState);
 observer.observe(document.body, { childList: true, subtree: true });
 
 setInterval(updateTime, 1000);
-setInterval(checkTrackChange, 3000);
+setInterval(checkState, 3000);
