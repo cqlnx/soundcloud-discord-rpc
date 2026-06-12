@@ -4,10 +4,22 @@ Shows your currently playing SoundCloud track in Discord, including the track ar
 
 ![preview](assets/preview.png)
 
+## Browser Extension
+
+**Firefox:** Install from the [Firefox Add-ons page](https://addons.mozilla.org/en-US/firefox/addon/soundcloud-discord-rpc/)
+
+**Chrome / Edge / Brave:** Load manually for now:
+1. Open the Extensions page:
+   - Chrome: `chrome://extensions`
+   - Edge: `edge://extensions`
+   - Brave: `brave://extensions`
+2. Enable **Developer mode** (toggle in the top-right corner)
+3. Click **Load unpacked**
+4. Select the `extension` folder
+
 ## Requirements
 
 - Python 3.9+
-- A Chromium or Firefox based browser
 - Discord desktop app
 
 ## Setup
@@ -24,27 +36,7 @@ Shows your currently playing SoundCloud track in Discord, including the track ar
 pip install -r requirements.txt
 ```
 
-### 3. Install the browser extension
-
-The extension reads what's playing in the SoundCloud web player and sends it to the local server.
-
-**Chrome / Edge / Brave:**
-1. Open the Extensions page:
-   - Chrome: `chrome://extensions`
-   - Edge: `edge://extensions`
-   - Brave: `brave://extensions`
-2. Enable **Developer mode** (toggle in the top-right corner)
-3. Click **Load unpacked**
-4. Select the `extension` folder
-
-**Firefox:**
-1. Open `about:debugging#/runtime/this-firefox`
-2. Click **Load Temporary Add-on**
-3. Open the `extension` folder and select `manifest.json`
-
-> **Note:** Firefox temporary add-ons are removed when the browser closes, so you'll need to reload it after restarting Firefox.
-
-### 4. Run the server
+### 3. Run the server
 
 ```bash
 python server.py
